@@ -6,17 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  math = Math;
-  title = 'pwa';
-  preview = '';
+  title = 'PWA';
   files: File[] = [];
-  
-  // On file Select
-  onChange(event: any) {
-    this.files.push(event.target.files[0]);
+  filePreviews: string[] = [];
 
-    this.preview = event.target.result;
-    console.log(event.target.files[0]);
-    
-}
+  
+  AddFilePreview($event: string) {
+    this.filePreviews.push($event);    
+  }
+  AddFile($event: File) {
+    this.files.push($event);    
+  }
 }

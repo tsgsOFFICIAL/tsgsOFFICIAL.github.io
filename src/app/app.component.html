@@ -5,4 +5,5 @@
         <img [src]=preview alt="{{ file.name }}"> {{ file.name }} <br> {{ math.trunc(file.size / 1024) }} KB <br> {{ file.type }} <br> {{ file.lastModified | date:'short' }}
     </li>
 </ul> -->
-<app-file-upload></app-file-upload>
+<app-file-upload (newFileEvent)="AddFile($event)" (newFilePreviewEvent)="AddFilePreview($event)"></app-file-upload>
+<app-datagrid [files]="files" [filePreviews]="filePreviews"></app-datagrid>

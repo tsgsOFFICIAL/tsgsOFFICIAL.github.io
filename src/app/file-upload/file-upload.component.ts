@@ -1,38 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
+
 export class FileUploadComponent implements OnInit {
-  imageURL: string;
-  uploadForm: FormGroup;
-  constructor(public fb: FormBuilder) {
-    // Reactive Form
-    this.uploadForm = this.fb.group({
-      avatar: [null],
-      name: ['']
-    })
-  }
+  @Output() newFileEvent = new EventEmitter<File>();
+  @Output() newFilePreviewEvent = new EventEmitter<string>();
+  
+  constructor() { }
+
   ngOnInit(): void { }
 
   // Image Preview
   showPreview(event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.uploadForm.patchValue({
-      avatar: file
-    });
-    this.uploadForm.get('avatar').updateValueAndValidity()
+
     // File Preview
     const reader = new FileReader();
     reader.onload = () => {
-      this.imageURL = reader.result as string;
+      this.newFileEvent.emit(file);
+      this.newFilePreviewEvent.emit(reader.result as string);
+      
     }
-    reader.readAsDataURL(file)
-  }
-  // Submit Form
-  submit() {
-    console.log(this.uploadForm.value)
+
+    reader.readAsDataURL(file);
   }
 }

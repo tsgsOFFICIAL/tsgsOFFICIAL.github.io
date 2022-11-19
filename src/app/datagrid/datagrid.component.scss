@@ -1,0 +1,252 @@
+/* Remove all margins and paddings, Remove blue highlight on mobile & Change the default font-family & color */
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: "OpenSans", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+
+/* Set font-size to 62.5% so 0.1rem = 1 px */
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+article#images {
+    min-height: 100vh;
+    margin-left: 5%;
+    max-width: 90%;
+}
+
+
+/* Project section */
+
+#images .container {
+    --hover-color: hsl(204, 61%, 50%);
+    --primary-text-color: white;
+    --text-color: #222526;
+    --gap: 50px;
+    --height: 200px;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gap);
+    min-height: 50%;
+    margin: calc(var(--height) / 2) 0;
+}
+
+#images .container .card {
+    position: relative;
+    min-width: 300px;
+    max-width: 10%;
+    height: var(--height);
+    margin-bottom: calc(var(--height) / 2 - var(--gap));
+}
+
+#images .container .card section {
+    width: 100%;
+    height: 100%;
+    transition: .5s ease;
+}
+
+#images .container .card .content {
+    height: 100%;
+    padding: 5%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    gap: calc(var(--height) / 25);
+}
+
+
+/* Top */
+
+#images .container .card .top {
+    position: relative;
+    background: #333;
+    z-index: 1;
+}
+
+#images .container .card .top .content {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#images .container .card .top .content img {
+    max-height: calc(var(--height) / 1.69);
+    max-width: 75%;
+    opacity: .2;
+    transition: .5s ease;
+}
+
+#images .container .card .top .content h3 {
+    color: var(--primary-text-color);
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 500;
+}
+
+
+/* Bottom */
+
+#images .container .card .bottom {
+    background: #FFFAFA;
+    transform: translateY(-100%);
+}
+
+#images .container .card .bottom .content {
+    justify-content: space-between;
+}
+
+#images .container .card .bottom .content * {
+    color: var(--text-color);
+}
+
+#images .container .card .bottom .content p {
+    font-size: 1.3rem;
+    display: -webkit-box;
+    max-height: 90%;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+#images .container .card .bottom .content button {
+    margin: 5% 0 0;
+    padding: 5px;
+    border: 1px solid #333;
+    border-radius: 3px;
+    background-color: transparent;
+    color: #333;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: .2s ease;
+    cursor: pointer;
+}
+
+
+/* Hover */
+
+#images .container .card:hover .top {
+    background: var(--hover-color);
+    transform: translateY(-50%);
+}
+
+#images .container .card:hover .top .content img {
+    opacity: 1;
+}
+
+#images .container .card:hover .bottom {
+    transform: translateY(-50%);
+}
+
+#images .container .card .bottom .content button:hover {
+    color: var(--hover-color);
+}
+
+
+/* Modal */
+
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    background-color: #333;
+}
+
+.modal.open {
+    display: flex;
+    animation: slideUpExpand .69s ease-out;
+}
+
+.modal.closing {
+    animation: slideDownCollapse .69s ease-in;
+}
+
+.modal .header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    margin-left: 5%;
+    max-width: 90%;
+}
+
+.modal .header h3 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.4rem;
+    font-weight: 500;
+    gap: 2rem;
+}
+
+.modal .header h3 input {
+    font-size: 3rem;
+    border-radius: 5px;
+    outline: none;
+}
+
+.modal .header .animatedIcon {
+    width: 2.5em;
+}
+
+.modal .header button {
+    position: absolute;
+    right: 5%;
+    font-size: 5.69rem;
+    background-color: transparent;
+    border: none;
+    transition: .2s ease;
+    cursor: pointer;
+}
+
+.modal .header button:hover {
+    color: var(--fail-color);
+}
+
+.modal .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+    margin-left: 5%;
+    max-width: 90%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-bottom: 3rem;
+}
+
+.modal .content div {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    gap: 2.5rem;
+}
+
+.modal .content div img.screenshot {
+    max-width: 100%;
+    max-height: 100%;
+}
